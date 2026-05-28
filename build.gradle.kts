@@ -2,6 +2,7 @@
 
 plugins {
     id("org.jetbrains.kotlin.multiplatform") version "2.3.0"
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.3.0"
 }
 
 group = "com.github.adamyork"
@@ -19,6 +20,8 @@ kotlin {
         }
         wasmJsMain.dependencies {
             implementation("org.jetbrains.kotlinx:kotlinx-browser:0.3")
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0")
+            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
         }
     }
 }
