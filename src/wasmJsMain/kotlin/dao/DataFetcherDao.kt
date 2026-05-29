@@ -1,9 +1,13 @@
 package dao
 
+import AppScope
 import kotlinx.browser.window
 import kotlinx.coroutines.await
 import kotlinx.serialization.json.Json
+import me.tatarka.inject.annotations.Inject
 
+@AppScope
+@Inject
 class DataFetcherDao {
 
     suspend fun loadData(id: Int): Todo {

@@ -1,9 +1,13 @@
 @file:OptIn(ExperimentalWasmJsInterop::class)
 
-import kotlinx.browser.document
-import org.w3c.dom.HTMLAnchorElement
-import service.ExampleLibService
+package gui
 
+import external.ExampleLibProxy
+import kotlinx.browser.document
+import me.tatarka.inject.annotations.Inject
+import org.w3c.dom.HTMLAnchorElement
+
+@Inject
 class BodyHeader {
 
     fun buildUI() {
@@ -15,8 +19,8 @@ class BodyHeader {
         logoLink.textContent = "Wasm Bridge"
         header?.appendChild(logoLink)
 
-        val exampleLibService = ExampleLibService()
-        exampleLibService.testFunc()
+        val exampleLibProxy = ExampleLibProxy()
+        exampleLibProxy.invokeTestFunc()
 
         val nav = document.createElement("nav")
         val ul = document.createElement("ul")

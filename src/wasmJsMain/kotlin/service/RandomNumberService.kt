@@ -1,11 +1,13 @@
 package service
 
+import AppScope
 import dao.DataFetcherDao
+import me.tatarka.inject.annotations.Inject
 import kotlin.random.Random
 
-class RandomNumberService {
-
-    val dataFetcherDao = DataFetcherDao()
+@AppScope
+@Inject
+class RandomNumberService(private val dataFetcherDao: DataFetcherDao) {
 
     suspend fun getRandomNumber(): Int {
         println("Get Random Number")

@@ -1,5 +1,9 @@
-import kotlinx.browser.document
+package gui
 
+import kotlinx.browser.document
+import me.tatarka.inject.annotations.Inject
+
+@Inject
 class BodyFooter {
 
     fun buildUI() {

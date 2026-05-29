@@ -1,16 +1,20 @@
 @file:OptIn(ExperimentalWasmJsInterop::class)
 
+package gui
+
 import kotlinx.browser.document
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import me.tatarka.inject.annotations.Inject
 import org.w3c.dom.*
 import service.RandomNumberService
 
-class BodyMain {
+@Inject
+class BodyMain(private val randomNumberService: RandomNumberService) {
 
     private val uiScope = MainScope()
 
-    fun buildUI(randomNumberService: RandomNumberService) {
+    fun buildUI() {
         println("Kotlin: Starting to build body main...")
         val main = document.querySelector("main")
         val img = document.createElement("img") as HTMLImageElement
@@ -27,8 +31,13 @@ class BodyMain {
         article.appendChild(h2)
 
         val p = document.createElement("p") as HTMLParagraphElement
-        p.textContent =
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        p.textContent = """Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
+            pariatur. Excepteur sint occaecat cupidatat non proident, 
+            sunt in culpa qui officia deserunt mollit anim id est laborum.""".trimMargin()
         article.appendChild(p)
 
         val hr = document.createElement("hr") as HTMLHRElement
