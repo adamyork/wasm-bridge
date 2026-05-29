@@ -8,9 +8,9 @@ import me.tatarka.inject.annotations.Inject
 import org.w3c.dom.HTMLAnchorElement
 
 @Inject
-class BodyHeader {
+class BodyHeader : BodyElement {
 
-    fun buildUI() {
+    override fun build() {
         println("Kotlin: Starting to build header...")
         val header = document.querySelector("header")
         val logoLink = document.createElement("a") as HTMLAnchorElement

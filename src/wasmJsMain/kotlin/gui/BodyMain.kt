@@ -10,11 +10,11 @@ import org.w3c.dom.*
 import service.RandomNumberService
 
 @Inject
-class BodyMain(private val randomNumberService: RandomNumberService) {
+class BodyMain(private val randomNumberService: RandomNumberService) : BodyElement {
 
     private val uiScope = MainScope()
 
-    fun buildUI() {
+    override fun build() {
         println("Kotlin: Starting to build body main...")
         val main = document.querySelector("main")
         val img = document.createElement("img") as HTMLImageElement

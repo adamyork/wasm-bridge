@@ -4,9 +4,9 @@ import kotlinx.browser.document
 import me.tatarka.inject.annotations.Inject
 
 @Inject
-class BodyFooter {
+class BodyFooter : BodyElement {
 
-    fun buildUI() {
+    override fun build() {
         println("Kotlin: Starting to build footer...")
         val footer = document.querySelector("footer")
         val p = document.createElement("p")
