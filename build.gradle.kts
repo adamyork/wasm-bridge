@@ -18,6 +18,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation("me.tatarka.inject:kotlin-inject-runtime:0.7.2")
+            implementation("io.github.reactivecircus.cache4k:cache4k:0.14.0")
         }
         commonTest.dependencies {
             implementation("org.jetbrains.kotlin:kotlin-test:2.3.0")
