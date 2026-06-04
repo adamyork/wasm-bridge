@@ -4,6 +4,7 @@ import AppScope
 import Footer
 import Header
 import Main
+import gui.bodyMain.BodyMain
 import me.tatarka.inject.annotations.Provides
 
 interface GuiConfig {
