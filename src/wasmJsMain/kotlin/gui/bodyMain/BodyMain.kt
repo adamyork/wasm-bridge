@@ -1,6 +1,7 @@
 package gui.bodyMain
 
 import gui.BodyElement
+import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.browser.document
 import kotlinx.coroutines.MainScope
 import me.tatarka.inject.annotations.Inject
@@ -10,10 +11,12 @@ import service.RandomNumberService
 @Inject
 class BodyMain(private val randomNumberService: RandomNumberService) : BodyElement {
 
+    private val logger = KotlinLogging.logger {}
+
     private val uiScope = MainScope()
 
     override fun build() {
-        println("Kotlin: Starting to build body main...")
+        logger.info { "starting to build body main" }
         val main = document.querySelector("main")
         val img = document.createElement("img") as HTMLImageElement
         img.className = "hero-image"
@@ -62,6 +65,6 @@ class BodyMain(private val randomNumberService: RandomNumberService) : BodyEleme
         article.appendChild(buttonGroupParallelContent)
 
         main?.appendChild(article)
-        println("Kotlin: Finished building body main.")
+        logger.info { "finished building body main." }
     }
 }

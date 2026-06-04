@@ -3,6 +3,7 @@
 package gui
 
 import external.ExampleLibProxy
+import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.browser.document
 import me.tatarka.inject.annotations.Inject
 import org.w3c.dom.HTMLAnchorElement
@@ -10,8 +11,10 @@ import org.w3c.dom.HTMLAnchorElement
 @Inject
 class BodyHeader : BodyElement {
 
+    private val logger = KotlinLogging.logger {}
+
     override fun build() {
-        println("Kotlin: Starting to build header...")
+        logger.info { "starting to build header" }
         val header = document.querySelector("header")
         val logoLink = document.createElement("a") as HTMLAnchorElement
         logoLink.href = "#"
@@ -43,7 +46,7 @@ class BodyHeader : BodyElement {
         }
         nav.appendChild(ul)
         header?.appendChild(nav)
-        println("Kotlin: header built...")
+        logger.info { "header built" }
     }
 
 }

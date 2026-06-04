@@ -1,4 +1,4 @@
 document.exampleLib = {};
 document.exampleLib.testFunc = () => {
-    console.log("test func called");
+    console.info("[example-lib] [js] [info] [testFunc] -> testFunc invoked");
 }

@@ -19,6 +19,7 @@ kotlin {
         commonMain.dependencies {
             implementation("me.tatarka.inject:kotlin-inject-runtime:0.7.2")
             implementation("io.github.reactivecircus.cache4k:cache4k:0.14.0")
+            implementation("io.github.oshai:kotlin-logging:8.0.4")
         }
         wasmJsMain.dependencies {
             implementation("org.jetbrains.kotlinx:kotlinx-browser:0.3")

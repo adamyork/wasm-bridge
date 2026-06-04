@@ -1,5 +1,6 @@
 package gui.bodyMain
 
+import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.browser.document
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -9,6 +10,8 @@ import org.w3c.dom.HTMLLabelElement
 import service.RandomNumberService
 
 class ButtonGroupNoCache {
+
+    private val logger = KotlinLogging.logger {}
 
     fun build(uiScope: CoroutineScope, randomNumberService: RandomNumberService): HTMLDivElement {
         val randomContainer = document.createElement("div") as HTMLDivElement
@@ -30,7 +33,7 @@ class ButtonGroupNoCache {
                     randomNumberLabel.textContent = randomNum.toString()
                 } catch (t: Throwable) {
                     randomNumberLabel.textContent = "Error loading number"
-                    println("Failed to generate number: ${t.message}")
+                    logger.error { "Failed to generate number: ${t.message}" }
                 }
             }
         }

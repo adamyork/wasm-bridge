@@ -2,6 +2,7 @@ package dao
 
 import AppScope
 import dao.data.Todo
+import io.github.oshai.kotlinlogging.KotlinLogging
 import io.github.reactivecircus.cache4k.Cache
 import kotlinx.browser.window
 import kotlinx.coroutines.await
@@ -12,30 +13,31 @@ import me.tatarka.inject.annotations.Inject
 @Inject
 class DefaultDataFetcherDao(private val dataCache: Cache<Long, Todo>) : DataFetcherDao {
 
+    private val logger = KotlinLogging.logger {}
+
     override suspend fun loadData(id: Int, bustCache: Boolean): Todo {
         return try {
-            println("about to fetch todos")
+            logger.info { "about to fetch todos" }
             if (bustCache) {
                 fetchTodo(id)
             } else {
                 dataCache.get(1) {
-                    println("Cached id not preset fetching")
+                    logger.info { "Cached id not preset fetching" }
                     fetchTodo(id)
                 }
             }
         } catch (t: Throwable) {
-            println("Request failed: ${t.message}")
+            logger.error { "Request failed: ${t.message}" }
             throw t
         }
     }
 
     @OptIn(ExperimentalWasmJsInterop::class)
     private suspend fun fetchTodo(id: Int): Todo {
-        println("in the suspend")
         val response = window.fetch("https://jsonplaceholder.typicode.com/todos/${id}").await()
 
         if (!response.ok) {
-            println("response not ok")
+            logger.error { "response not ok" }
             error("HTTP ${response.status}: ${response.statusText}")
         }
 
