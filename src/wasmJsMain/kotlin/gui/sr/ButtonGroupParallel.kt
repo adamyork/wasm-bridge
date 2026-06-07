@@ -20,10 +20,13 @@ class ButtonGroupParallel {
         val parallelRandomSumButton = document.createElement("button") as HTMLButtonElement
         parallelRandomSumButton.textContent = "Generate Random Number From Two"
         parallelRandomSumButton.className = "btn"
+        parallelRandomSumButton.setAttribute("aria-controls", "cached-random-label-3")
         parallelRandomSumContainer.appendChild(parallelRandomSumButton)
 
         val parallelRandomSumLabel = document.createElement("label") as HTMLLabelElement
         parallelRandomSumLabel.className = "lbl"
+        parallelRandomSumLabel.setAttribute("role", "status")
+        parallelRandomSumLabel.setAttribute("aria-live", "polite")
         parallelRandomSumContainer.appendChild(parallelRandomSumLabel)
 
         parallelRandomSumButton.onclick = {

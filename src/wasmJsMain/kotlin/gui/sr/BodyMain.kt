@@ -17,6 +17,7 @@ class BodyMain(private val randomNumberService: RandomNumberService) : BodyEleme
     override fun build() {
         logger.info { "starting to build body main" }
         val main = document.querySelector("#srMain")
+        main?.setAttribute("role", "main")
         val img = document.createElement("img") as HTMLImageElement
         img.className = "hero-image"
         img.src = "https://picsum.photos/800/400"
@@ -45,6 +46,8 @@ class BodyMain(private val randomNumberService: RandomNumberService) : BodyEleme
 
         val buttonGroupNoCache = ButtonGroupNoCache()
         val buttonGroupNoCacheContent = buttonGroupNoCache.build(uiScope, randomNumberService)
+        buttonGroupNoCacheContent.setAttribute("role", "group")
+        buttonGroupNoCacheContent.setAttribute("aria-label", "Uncached actions")
 
         article.appendChild(buttonGroupNoCacheContent)
 
@@ -53,6 +56,8 @@ class BodyMain(private val randomNumberService: RandomNumberService) : BodyEleme
 
         val buttonGroupCached = ButtonGroupCached()
         val buttonGroupCachedContent = buttonGroupCached.build(uiScope, randomNumberService)
+        buttonGroupCachedContent.setAttribute("role", "group")
+        buttonGroupCachedContent.setAttribute("aria-label", "Cached actions")
 
         article.appendChild(buttonGroupCachedContent)
 
@@ -61,6 +66,8 @@ class BodyMain(private val randomNumberService: RandomNumberService) : BodyEleme
 
         val buttonGroupParallel = ButtonGroupParallel()
         val buttonGroupParallelContent = buttonGroupParallel.build(uiScope, randomNumberService)
+        buttonGroupParallelContent.setAttribute("role", "group")
+        buttonGroupParallelContent.setAttribute("aria-label", "Parallel actions")
         article.appendChild(buttonGroupParallelContent)
 
         main?.appendChild(article)

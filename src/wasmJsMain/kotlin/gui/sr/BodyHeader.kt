@@ -16,16 +16,19 @@ class BodyHeader : BodyElement {
     override fun build() {
         logger.info { "starting to build header" }
         val header = document.querySelector("#srHead")
+        header?.setAttribute("role", "banner")
         val logoLink = document.createElement("a") as HTMLAnchorElement
         logoLink.href = "#"
         logoLink.className = "logo"
         logoLink.textContent = "Wasm Bridge"
+        logoLink.setAttribute("aria-label", "Wasm Bridge Home")
         header?.appendChild(logoLink)
 
         val exampleLibProxy = ExampleLibProxy()
         exampleLibProxy.invokeTestFunc()
 
         val nav = document.createElement("nav")
+        nav.setAttribute("aria-label", "Main Navigation")
         val ul = document.createElement("ul")
 
         val menuItems = listOf(

@@ -20,10 +20,13 @@ class ButtonGroupNoCache {
         val randomNumberButton = document.createElement("button") as HTMLButtonElement
         randomNumberButton.textContent = "Generate Random Number"
         randomNumberButton.className = "btn"
+        randomNumberButton.setAttribute("aria-controls", "cached-random-label-2")
         randomContainer.appendChild(randomNumberButton)
 
         val randomNumberLabel = document.createElement("label") as HTMLLabelElement
         randomNumberLabel.className = "lbl"
+        randomNumberLabel.setAttribute("role", "status")
+        randomNumberLabel.setAttribute("aria-live", "polite")
         randomContainer.appendChild(randomNumberLabel)
 
         randomNumberButton.onclick = {
