@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalWasmJsInterop::class)
 
-package gui
+package gui.sr
 
 import external.ExampleLibProxy
 import io.github.oshai.kotlinlogging.KotlinLogging
@@ -15,7 +15,7 @@ class BodyHeader : BodyElement {
 
     override fun build() {
         logger.info { "starting to build header" }
-        val header = document.querySelector("header")
+        val header = document.querySelector("#srHead")
         val logoLink = document.createElement("a") as HTMLAnchorElement
         logoLink.href = "#"
         logoLink.className = "logo"

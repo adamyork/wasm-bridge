@@ -1,4 +1,4 @@
-package gui.bodyMain
+package gui.sr
 
 import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.browser.document

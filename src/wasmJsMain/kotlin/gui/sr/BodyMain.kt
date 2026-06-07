@@ -1,6 +1,5 @@
-package gui.bodyMain
+package gui.sr
 
-import gui.BodyElement
 import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.browser.document
 import kotlinx.coroutines.MainScope
@@ -17,7 +16,7 @@ class BodyMain(private val randomNumberService: RandomNumberService) : BodyEleme
 
     override fun build() {
         logger.info { "starting to build body main" }
-        val main = document.querySelector("main")
+        val main = document.querySelector("#srMain")
         val img = document.createElement("img") as HTMLImageElement
         img.className = "hero-image"
         img.src = "https://picsum.photos/800/400"

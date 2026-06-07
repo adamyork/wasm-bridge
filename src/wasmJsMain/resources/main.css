@@ -1,3 +1,12 @@
+html, body, canvas {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    overflow: hidden;
+}
+
 :root {
     --bg-color: #f8fafc;
     --card-bg: #ffffff;
@@ -178,4 +187,16 @@ footer {
 
 .lbl {
     padding: 20px;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
