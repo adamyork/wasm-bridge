@@ -5,6 +5,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import external.ExampleLibProxy
 import kotlinx.browser.window
 import me.tatarka.inject.annotations.Inject
@@ -16,14 +19,20 @@ class ComposeBodyHeader : ComposeBodyElement {
     @Composable
     override fun build(): Unit {
         TopAppBar(
+            modifier = Modifier
+                .semantics { contentDescription = "Main header navigation" }
+                .testTag("compose-body-header"),
             title = {
                 // Your logo/link element
                 Text(
                     text = "Wasm Bridge",
                     style = MaterialTheme.typography.titleLarge,
-                    modifier = Modifier.clickable {
+                    modifier = Modifier
+                        .clickable {
                         // Handle navigation or set window.location.hash = "#"
-                    }
+                        }
+                        .semantics { contentDescription = "Home" }
+                        .testTag("header-title-link")
                 )
             },
             actions = {
@@ -45,7 +54,10 @@ class ComposeBodyHeader : ComposeBodyElement {
                         onClick = {
                             // The framework automatically handles navigation without raw DOM appends
                             window.location.hash = hash
-                        }
+                        },
+                        modifier = Modifier
+                            .semantics { contentDescription = "Navigate to $text section" }
+                            .testTag("header-menu-${text.lowercase()}")
                     ) {
                         Text(text = text)
                     }

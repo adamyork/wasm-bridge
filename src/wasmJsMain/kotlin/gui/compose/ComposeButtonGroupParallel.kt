@@ -19,6 +19,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -57,6 +60,8 @@ class ComposeButtonGroupParallel {
             modifier = Modifier
                 .widthIn(max = 450.dp)
                 .fillMaxWidth()
+                .semantics { contentDescription = "Parallel random number section" }
+                .testTag("button-group-parallel")
                 .background(
                     color = MaterialTheme.colorScheme.surfaceContainer,
                     shape = MaterialTheme.shapes.medium
@@ -100,6 +105,8 @@ class ComposeButtonGroupParallel {
                     .graphicsLayer {
                         translationY = if (isPressed && isEnabled) 1.dp.toPx() else 0f
                     }
+                    .semantics { contentDescription = "Generate random number from two values" }
+                    .testTag("button-generate-parallel")
             ) {
                 Text(
                     text = "Generate Random Number From Two",
@@ -112,7 +119,10 @@ class ComposeButtonGroupParallel {
                 Text(
                     text = labelText,
                     style = MaterialTheme.typography.bodyLarge,
-                    color = if (isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant
+                    color = if (isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier
+                        .semantics { contentDescription = if (isError) "Parallel random number error" else "Parallel random number result" }
+                        .testTag("parallel-result-text")
                 )
             }
         }

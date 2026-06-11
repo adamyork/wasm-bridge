@@ -5,10 +5,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.CanvasBasedWindow
-import gui.compose.ComposeBodyElement
+import androidx.compose.ui.window.ComposeViewport
 import gui.WasmBridgeColorScheme
+import gui.compose.ComposeBodyElement
 import io.github.oshai.kotlinlogging.KotlinLogging
 import io.github.oshai.kotlinlogging.Level
 import kotlinx.browser.document
@@ -23,9 +26,6 @@ fun main() {
     val readyState = document.readyState.toString()
     logger.info { "current DOM readyState: $readyState" }
     val component = AppConfig::class.create()
-    val srBodyHeader = component.bodyHeader
-    val srBodyMain = component.bodyMain
-    val srBodyFooter = component.bodyFooter
     val composeBodyHeader = component.composeBodyHeader
     val composeBodyMain = component.composeBodyMain
     val composeBodyFooter = component.composeBodyFooter
@@ -33,16 +33,10 @@ fun main() {
     if (readyState == "interactive" || readyState == "complete") {
         logger.info { "DOM already loaded. Initializing layout immediately" }
         buildGui(composeBodyHeader, composeBodyMain, composeBodyFooter, wasmBridgeColorScheme)
-        srBodyHeader.build()
-        srBodyMain.build()
-        srBodyFooter.build()
     } else {
         logger.info { "DOM not ready yet. Registering event listener." }
         window.addEventListener("DOMContentLoaded") {
             buildGui(composeBodyHeader, composeBodyMain, composeBodyFooter, wasmBridgeColorScheme)
-            srBodyHeader.build()
-            srBodyMain.build()
-            srBodyFooter.build()
         }
     }
 }
@@ -54,14 +48,16 @@ private fun buildGui(
     composeBodyFooter: ComposeBodyElement,
     wasmBridgeColorScheme: WasmBridgeColorScheme
 ) {
-    CanvasBasedWindow(
-        title = "wasm-bridge",
-        canvasElementId = "ComposeTarget"
+    ComposeViewport(
+        viewportContainerId = "ComposeTarget"
     ) {
         MaterialTheme(
             colorScheme = wasmBridgeColorScheme.getScheme()
         ) {
             Scaffold(
+                modifier = Modifier
+                    .semantics { contentDescription = "Application scaffold" }
+                    .testTag("app-scaffold"),
                 topBar = {
                     composeBodyHeader.build()
                 },
@@ -72,6 +68,8 @@ private fun buildGui(
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
+                        .semantics { contentDescription = "Main page layout container" }
+                        .testTag("app-main-layout")
                         .padding(innerPadding),
                     contentAlignment = Alignment.TopCenter
                 ) {
@@ -79,6 +77,8 @@ private fun buildGui(
                         modifier = Modifier
                             .widthIn(max = 800.dp)
                             .fillMaxWidth()
+                            .semantics { contentDescription = "Main content max width container" }
+                            .testTag("app-main-content-wrapper")
                     ) {
                         composeBodyMain.build()
                     }

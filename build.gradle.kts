@@ -4,7 +4,7 @@ plugins {
     id("org.jetbrains.kotlin.multiplatform") version "2.3.20"
     id("org.jetbrains.kotlin.plugin.serialization") version "2.3.20"
     id("com.google.devtools.ksp") version "2.3.9"
-    id("org.jetbrains.compose") version "1.7.3"
+    id("org.jetbrains.compose") version "1.11.1"
     id("org.jetbrains.kotlin.plugin.compose") version "2.3.20"
 }
 
@@ -12,6 +12,7 @@ group = "com.github.adamyork"
 version = "0.0.1"
 
 repositories {
+    google()
     mavenCentral()
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
 }
@@ -27,11 +28,11 @@ kotlin {
             implementation("me.tatarka.inject:kotlin-inject-runtime:0.7.2")
             implementation("io.github.reactivecircus.cache4k:cache4k:0.14.0")
             implementation("io.github.oshai:kotlin-logging:8.0.4")
-            implementation("org.jetbrains.compose.runtime:runtime:1.7.3")
-            implementation("org.jetbrains.compose.foundation:foundation:1.7.3")
-            implementation("org.jetbrains.compose.ui:ui:1.7.3")
-            implementation("org.jetbrains.compose.material3:material3:1.7.3")
-            implementation("org.jetbrains.compose.components:components-resources:1.7.3")
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.ui)
+            implementation(compose.material3)
+            implementation(compose.components.resources)
             implementation("io.coil-kt.coil3:coil-compose:3.0.4")
             implementation("io.coil-kt.coil3:coil-network-ktor3:3.0.4")
             implementation("io.ktor:ktor-client-js:3.0.1")
